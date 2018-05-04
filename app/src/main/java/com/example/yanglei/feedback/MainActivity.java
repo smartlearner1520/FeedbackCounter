@@ -7,28 +7,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.VideoView;
 
 public class MainActivity extends AppCompatActivity {
-    private static String inpString ="";
-    Button button;
-    private VideoView video;
+    //private VideoView video;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        inpString="";
-        button = (Button)findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                inpString = "test";
-            }
-        });
 
+
+//        TODO: using thread to detect action
 //        video = (VideoView) findViewById(R.id.video);
 //        File file = new File("/storage/sdcard0/1.mp4");
 //        Log.i("Video path", Environment.getExternalStorageDirectory().getPath());
@@ -87,20 +80,14 @@ public class MainActivity extends AppCompatActivity {
 //            Toast.makeText(MainActivity.this, "no such file", Toast.LENGTH_SHORT).show();
 //        }
 
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                while(inpString.equals("")){
 
-                }
-//                video.stopPlayback();
-                inpString="";
-                Intent intent = new Intent(MainActivity.this,EnterPage.class);
-                startActivity(intent);
-            }
-        };
-        Thread thread = new Thread(runnable);
-        thread.start();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        Intent intent = new Intent(MainActivity.this,EnterPage.class);
+        startActivity(intent);
+        return super.onTouchEvent(event);
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)  {
@@ -133,9 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
-    public static String getName(){
-        return inpString;
-    }
+
 
 }
 

@@ -3,6 +3,7 @@ package com.example.yanglei.feedback;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,11 +36,14 @@ public class ResultPage extends AppCompatActivity {
     private String[] stlist = new String[18];
     private int total=0;
     int state=0;
+    private CountTimer countTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resultpage);
+
+        countTimer = new CountTimer(10000,1000,ResultPage.this);
 
         try {
             fr = new FileReader("/storage/sdcard0/total.txt");
@@ -122,6 +126,17 @@ public class ResultPage extends AppCompatActivity {
 
     }
 
+    private void timeStart(){
+        new Handler(getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                countTimer.start();
+            }
+        });
+    }
+
+
+
     @Override
     public boolean onTouchEvent(MotionEvent event){
         state++;
@@ -158,4 +173,30 @@ public class ResultPage extends AppCompatActivity {
         Intent intent = new Intent(ResultPage.this, MainActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()){
+
+            case MotionEvent.ACTION_UP:
+                countTimer.start();
+                break;
+
+            default:countTimer.cancel();
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        countTimer.cancel();
+    }
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+        timeStart();
+    }
+
 }

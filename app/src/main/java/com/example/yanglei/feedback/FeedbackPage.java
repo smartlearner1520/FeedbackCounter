@@ -1,10 +1,12 @@
 package com.example.yanglei.feedback;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -25,6 +27,7 @@ public class FeedbackPage extends AppCompatActivity {
     private static int[] checksum = new int[18];
     private FileWriter fw,fw1;
     private BufferedWriter writer,writer1;
+    private CountTimer countTimer;
     private int max =0;
     {
         try {
@@ -40,10 +43,11 @@ public class FeedbackPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.transition.slide_down,R.transition.slide_top);
+        //overridePendingTransition(R.transition.slide_down,R.transition.slide_top);
         setContentView(R.layout.feedback_page);
 
-        SectionName = MainActivity.getName();
+        countTimer = new CountTimer(10000,1000,FeedbackPage.this);
+        SectionName = EnterPage.getName();
         t1 = (TextView) findViewById(R.id.t1);
         t1.setText("You have scanned " + SectionName +". Please select the areas\n you enjoyed the most from this department.");
 
@@ -170,6 +174,17 @@ public class FeedbackPage extends AppCompatActivity {
         });
 
     }
+
+    private void timeStart(){
+        new Handler(getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                countTimer.start();
+            }
+        });
+    }
+
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (Integer.parseInt(android.os.Build.VERSION.SDK) > 5
@@ -191,4 +206,30 @@ public class FeedbackPage extends AppCompatActivity {
         Intent intent = new Intent(FeedbackPage.this, MainActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()){
+
+            case MotionEvent.ACTION_UP:
+                countTimer.start();
+                break;
+
+            default:countTimer.cancel();
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        countTimer.cancel();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        timeStart();
+    }
 }
+
+

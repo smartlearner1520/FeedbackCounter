@@ -26,14 +26,15 @@
         <activity
             android:name=".FeedbackPage"
             android:configChanges="keyboard|keyboardHidden|orientation"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".ResultPage"
             android:configChanges="keyboard|keyboardHidden|orientation"
-            android:screenOrientation="landscape"></activity>
-        <activity android:name=".EnterPage"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".EnterPage"
             android:configChanges="keyboard|keyboardHidden|orientation"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>
