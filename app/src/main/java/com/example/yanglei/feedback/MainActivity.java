@@ -14,11 +14,13 @@ import android.widget.VideoView;
 
 public class MainActivity extends AppCompatActivity {
     //private VideoView video;
+    private static String dirPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dirPath=getFilesDir().getPath();
 
 
 //        TODO: using thread to detect action
@@ -118,6 +120,10 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+
+    public static String getDirPath(){
+        return dirPath;
     }
 
 

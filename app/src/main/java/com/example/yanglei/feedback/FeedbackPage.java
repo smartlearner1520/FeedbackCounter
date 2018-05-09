@@ -1,6 +1,7 @@
 package com.example.yanglei.feedback;
 
 import android.content.Intent;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,8 +32,8 @@ public class FeedbackPage extends AppCompatActivity {
     private int max =0;
     {
         try {
-            fw = new FileWriter("/storage/sdcard0/output.txt",true);
-            fw1 = new FileWriter("/storage/sdcard0/total.txt");
+            fw = new FileWriter(MainActivity.getDirPath()+"output.txt",true);
+            fw1 = new FileWriter(MainActivity.getDirPath()+"total.txt");
             writer = new BufferedWriter(fw);
             writer1 = new BufferedWriter(fw1);
         } catch (IOException e) {

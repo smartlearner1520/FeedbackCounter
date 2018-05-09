@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -33,7 +35,6 @@ public class EnterPage extends AppCompatActivity {
         setContentView(R.layout.enter_page);
 
         countTimer = new CountTimer(10000,1000,EnterPage.this);
-
 
         button = (Button) findViewById(R.id.b3);
         button.setOnClickListener(new View.OnClickListener() {

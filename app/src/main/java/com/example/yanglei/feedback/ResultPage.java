@@ -46,7 +46,7 @@ public class ResultPage extends AppCompatActivity {
         countTimer = new CountTimer(10000,1000,ResultPage.this);
 
         try {
-            fr = new FileReader("/storage/sdcard0/total.txt");
+            fr = new FileReader(MainActivity.getDirPath()+"total.txt");
             bfr = new BufferedReader(fr);
             String line=null;
             int i=0;
