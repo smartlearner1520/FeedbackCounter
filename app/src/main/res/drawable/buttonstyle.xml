@@ -12,7 +12,7 @@
         android:left="10dp"
         android:right="10dp">
         <shape>
-            <solid android:color="#FFCC00" />
+            <solid android:color="#FFBA35" />
             <padding android:bottom="10dp"
                 android:left="10dp"
                 android:right="10dp"

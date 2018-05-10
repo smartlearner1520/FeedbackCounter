@@ -32,8 +32,8 @@ public class ResultPage extends AppCompatActivity {
     private DataPoint[] dataPoints;
     private FileReader fr;
     private BufferedReader bfr;
-    private int[] intlist = new int[18];
-    private String[] stlist = new String[18];
+    private int[] intlist = new int[8];
+    private String[] stlist = new String[8];
     private int total=0;
     int state=0;
     private CountTimer countTimer;
@@ -46,12 +46,13 @@ public class ResultPage extends AppCompatActivity {
         countTimer = new CountTimer(10000,1000,ResultPage.this);
 
         try {
-            fr = new FileReader(MainActivity.getDirPath()+"total.txt");
+            fr = new FileReader(MainActivity.getDirPath()+"Section.txt");
             bfr = new BufferedReader(fr);
             String line=null;
             int i=0;
             while((line = bfr.readLine())!=null){
                 stlist[i] = line.split(" ")[0];
+                Log.i("yl",stlist[i]);
                 intlist[i] = Integer.parseInt(line.split(" ")[1]);
                 i++;
             }
@@ -61,7 +62,7 @@ public class ResultPage extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        dataPoints = new DataPoint[18];
+        dataPoints = new DataPoint[8];
         for(int i=0; i<stlist.length;i++){
             total+=intlist[i];
         }
@@ -76,13 +77,16 @@ public class ResultPage extends AppCompatActivity {
 
         graphView = (GraphView) findViewById(R.id.graph);
         GridLabelRenderer gridLabelRenderer = graphView.getGridLabelRenderer();
-        gridLabelRenderer.setVerticalAxisTitle("%");
+        gridLabelRenderer.setVerticalAxisTitle("Percentage (%)");
         BarGraphSeries<DataPoint> series = new BarGraphSeries<DataPoint>(dataPoints);
 
         StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graphView);
         staticLabelsFormatter.setHorizontalLabels(stlist);
         graphView.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
         graphView.addSeries(series);
+        graphView.getViewport().setMinY(0);
+        graphView.getViewport().setMaxY(100);
+        graphView.getViewport().setYAxisBoundsManual(true);
 
         series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
             @Override
@@ -91,7 +95,9 @@ public class ResultPage extends AppCompatActivity {
             }
         });
 
-        series.setSpacing(5);
+        series.setSpacing(50);
+        series.setDrawValuesOnTop(true);
+        series.setValuesOnTopColor(Color.rgb(0,0,250));
 
         graphView.setOnTouchListener(new View.OnTouchListener() {
             @Override

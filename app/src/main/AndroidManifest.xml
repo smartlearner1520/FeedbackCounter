@@ -33,7 +33,8 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".EnterPage"
-            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation"
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:screenOrientation="landscape" />
     </application>
 

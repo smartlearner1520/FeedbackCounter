@@ -10,17 +10,27 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.VideoView;
 
 public class MainActivity extends AppCompatActivity {
     //private VideoView video;
     private static String dirPath;
+    private TextView t1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dirPath=getFilesDir().getPath();
+        //dirPath=getFilesDir().getPath();
+        dirPath = "/storage/sdcard0/";
+        t1 = (TextView) findViewById(R.id.txt1);
+        t1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
 
 //        TODO: using thread to detect action
