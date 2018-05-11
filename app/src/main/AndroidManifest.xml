@@ -34,8 +34,12 @@
         <activity
             android:name=".EnterPage"
             android:configChanges="keyboardHidden|orientation"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".SetPassword"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="landscape">
+        </activity>
     </application>
 
 </manifest>

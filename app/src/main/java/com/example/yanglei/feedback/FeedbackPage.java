@@ -96,7 +96,6 @@ public class FeedbackPage extends AppCompatActivity {
         }
 
         try {
-            //###########
             Log.i("yl","features " + f.exists());
             if(f.exists()){
                 fr1 = new FileReader(f);

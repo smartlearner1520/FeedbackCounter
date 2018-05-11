@@ -7,29 +7,37 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.VideoView;
+import android.widget.PopupWindow;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.view.ViewGroup.LayoutParams;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     //private VideoView video;
     private static String dirPath;
-    private TextView t1;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dirPath="/storage/emulated/0/Documents/";
-        t1 = (TextView) findViewById(R.id.txt1);
-        t1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
+        dirPath="/storage/emulated/0/Documents/";
+        //dirPath="/storage/sdcard0/";
 
 
 //        TODO: using thread to detect action
@@ -96,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event){
-        Intent intent = new Intent(MainActivity.this,EnterPage.class);
+        Intent intent = new Intent(MainActivity.this, EnterPage.class);
         //Intent intent = new Intent(MainActivity.this,ResultPage.class);
         startActivity(intent);
         return super.onTouchEvent(event);

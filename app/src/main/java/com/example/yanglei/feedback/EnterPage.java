@@ -13,13 +13,21 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.security.Key;
 import java.util.HashMap;
 import java.util.Timer;
@@ -35,6 +43,13 @@ public class EnterPage extends AppCompatActivity {
     private static volatile String barcodestr;
     private static HashMap<String,Integer> sectionList = new HashMap<>();
     private static String[] sectionNameList = new String[8];
+    private static String password;
+    private static FileWriter fw;
+    private static File file;
+    private FileReader fr;
+    private static BufferedWriter writer;
+    private BufferedReader reader;
+    private Button b;
     {setSectionList();}
 
 
@@ -42,6 +57,32 @@ public class EnterPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.enter_page);
+        file = new File(MainActivity.getDirPath()+"password.txt");
+        try {
+            if(file.exists()){
+                fr = new FileReader(file);
+                reader = new BufferedReader(fr);
+                String line = reader.readLine();
+                password = line;
+            } else{
+                password="nlb1234";
+                fw = new FileWriter(file);
+                writer = new BufferedWriter(fw);
+                writer.write("nlb1234");
+                writer.flush();
+                writer.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        b = (Button) findViewById(R.id.nlb);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopupWindow(view);
+            }
+        });
 
 
         txt = (EditText) findViewById(R.id.editText);
@@ -182,5 +223,61 @@ public class EnterPage extends AppCompatActivity {
 //        return inpString;
 //    }
 
+
+    private void showPopupWindow(View view) {
+        View contentView = LayoutInflater.from(this).inflate(
+                R.layout.popup_window, null);
+        contentView.setFocusable(true);
+        final EditText pwtxt = (EditText) contentView.findViewById(R.id.pwtxt);
+        Button button = (Button) contentView.findViewById(R.id.b7);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(pwtxt.getText()!=null){
+                    Log.i("pwtxt",pwtxt.getText().toString());
+                    if(pwtxt.getText().toString().equals(password)) {
+                        Log.i("pwtxt","the password " + password );
+                        Intent intent = new Intent(EnterPage.this, SetPassword.class);
+                        startActivity(intent);
+                    }
+                } else{
+                    Log.i("pwtxt","it is null;");
+                }
+            }
+        });
+
+        final PopupWindow popupWindow = new PopupWindow(contentView,
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+
+        popupWindow.setTouchable(true);
+
+        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                Log.i("mengdd", "onTouch : ");
+
+                return false;
+            }
+        });
+
+
+        popupWindow.setBackgroundDrawable(getResources().getDrawable(
+                R.drawable.background_color));
+
+
+        popupWindow.showAsDropDown(view);
+
+    }
+
+    public static void setPassword(String pw) throws IOException {
+        fw = new FileWriter(file);
+        writer = new BufferedWriter(fw);
+        writer.write(pw);
+        writer.flush();
+        writer.close();
+    }
 
 }
