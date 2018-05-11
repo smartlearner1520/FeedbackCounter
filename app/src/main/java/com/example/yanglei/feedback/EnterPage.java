@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.File;
+import java.security.Key;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -44,44 +45,46 @@ public class EnterPage extends AppCompatActivity {
 
 
         txt = (EditText) findViewById(R.id.editText);
-        // using state =0; if state>1 --> pop up to ask do u want change to another tap? yes or no... // set only when press button and go next.
-        txt.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                int inType = txt.getInputType();
-                txt.setInputType(InputType.TYPE_NULL);
-                txt.onTouchEvent(motionEvent);
-                txt.setInputType(inType);
-                return true;
-            }
-        });
 
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                while(txt.getText().toString().equals("")){
+//
+//        Runnable runnable = new Runnable() {
+//            @Override
+//            public void run() {
+//                while(txt.getText().toString().equals("")){
+//
+//                }
+//                barcodestr = txt.getText().toString();
+//                if(!sectionList.containsKey(barcodestr)){
+//                    txt.setText("");
+//                    txt.setHint("Invalid Input");
+//                }
+//            }
+//        };
+//        final Thread thread = new Thread(runnable);
+//        thread.start();
 
-                }
-                barcodestr = txt.getText().toString();
-                if(!sectionList.containsKey(barcodestr)){
-                    txt.setText("");
-                    txt.setHint("Invalid Input");
-                }
-            }
-        };
-        final Thread thread = new Thread(runnable);
-        thread.start();
-
-        countTimer = new CountTimer(10000,1000,EnterPage.this);
+        countTimer = new CountTimer(300000,60000,EnterPage.this);
 
         button = (Button) findViewById(R.id.b3);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //todo need to change to barcodestr!!!
+                barcodestr = txt.getText().toString();
+//                txt.setText("");
+//                txt.setHint(barcodestr);
+//                txt.setFocusable(true);
+//                txt.setFocusableInTouchMode(true);
+//                txt.requestFocus();
                 if(sectionList.containsKey(barcodestr)){
+                    txt.setText("");
                     Intent intent = new Intent(EnterPage.this,FeedbackPage.class);
                     startActivity(intent);
+                } else{
+                    txt.setText("");
+                    txt.setHint("Invalid Input");
+                    txt.setFocusable(true);
+                    txt.setFocusableInTouchMode(true);
+                    txt.requestFocus();
                 }
             }
         });
@@ -178,5 +181,6 @@ public class EnterPage extends AppCompatActivity {
 //    public static String getName(){
 //        return inpString;
 //    }
+
 
 }

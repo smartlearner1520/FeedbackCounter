@@ -76,7 +76,7 @@ public class FeedbackPage extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        countTimer = new CountTimer(10000,1000,FeedbackPage.this);
+        countTimer = new CountTimer(300000,60000,FeedbackPage.this);
         SectionName = EnterPage.getBarcodeStr();
         //SectionName = EnterPage.getName();
 

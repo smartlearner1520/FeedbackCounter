@@ -13,8 +13,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.LabelFormatter;
 import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.BarGraphSeries;
@@ -26,6 +28,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class ResultPage extends AppCompatActivity {
     private GraphView graphView;
@@ -43,7 +46,7 @@ public class ResultPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resultpage);
 
-        countTimer = new CountTimer(10000,1000,ResultPage.this);
+        countTimer = new CountTimer(300000,60000,ResultPage.this);
 
         try {
             fr = new FileReader(MainActivity.getDirPath()+"Section.txt");
@@ -66,11 +69,13 @@ public class ResultPage extends AppCompatActivity {
         for(int i=0; i<stlist.length;i++){
             total+=intlist[i];
         }
+        //double[] test = new double[] {23.45,6.73,34.2,6.5,23.5,67.8,12.3,8.08};
         for(int i=0; i<stlist.length;i++){
             double d = intlist[i]/(double)total;
             DecimalFormat df = new DecimalFormat("#.####");
             d = Double.valueOf(df.format(d)) *100;
-            dataPoints[i] = new DataPoint(i,d);
+            dataPoints[i] = new DataPoint(i+1,d);
+            //dataPoints[i] = new DataPoint(i+1,test[i]);
             Log.i("Percentage " , "" + dataPoints[i]);
         }
 
@@ -81,12 +86,35 @@ public class ResultPage extends AppCompatActivity {
         BarGraphSeries<DataPoint> series = new BarGraphSeries<DataPoint>(dataPoints);
 
         StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graphView);
+        String[] newstr = new String[10];
+        System.arraycopy(stlist,0,newstr,1,stlist.length);
+//        newstr[1] = "AUTOMOBILE";
+//        newstr[2] = "ENTERTAINMENT";
+//        newstr[3] = "FASHION";
+//        newstr[4] = "FOOD";
+//        newstr[5] = "HOSPITALITY";
+//        newstr[6] = "HOUSEHOLD";
+//        newstr[7] = "MEDICAL";
+//        newstr[8] = "TRAVEL";
+        NumberFormat format = NumberFormat.getInstance();
+        format.setMinimumFractionDigits(1);
+        format.setMinimumIntegerDigits(1);
         staticLabelsFormatter.setHorizontalLabels(stlist);
+        staticLabelsFormatter.setDynamicLabelFormatter(new DefaultLabelFormatter(null,format));
         graphView.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+
         graphView.addSeries(series);
         graphView.getViewport().setMinY(0);
         graphView.getViewport().setMaxY(100);
         graphView.getViewport().setYAxisBoundsManual(true);
+        graphView.getViewport().setMinX(0);
+        graphView.getViewport().setMaxX(9);
+        graphView.getViewport().setXAxisBoundsManual(true);
+        graphView.getGridLabelRenderer().setHighlightZeroLines(false);
+        //TODO all x and y lines visible
+        graphView.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
+        //TODO vertical line visible
+        graphView.getGridLabelRenderer().setVerticalLabelsVisible(false);
 
         series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
             @Override
@@ -95,7 +123,7 @@ public class ResultPage extends AppCompatActivity {
             }
         });
 
-        series.setSpacing(50);
+        series.setSpacing(80);
         series.setDrawValuesOnTop(true);
         series.setValuesOnTopColor(Color.rgb(0,0,250));
 

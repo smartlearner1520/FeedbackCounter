@@ -76,6 +76,8 @@
         android:text=""
         android:textColor="#000000"
         android:textSize="40dp"
+        android:cursorVisible="true"
+        android:textCursorDrawable="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.07"

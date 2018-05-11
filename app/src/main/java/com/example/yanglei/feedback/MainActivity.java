@@ -22,8 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //dirPath=getFilesDir().getPath();
-        dirPath = "/storage/sdcard0/";
+        dirPath="/storage/emulated/0/Documents/";
         t1 = (TextView) findViewById(R.id.txt1);
         t1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onTouchEvent(MotionEvent event){
         Intent intent = new Intent(MainActivity.this,EnterPage.class);
+        //Intent intent = new Intent(MainActivity.this,ResultPage.class);
         startActivity(intent);
         return super.onTouchEvent(event);
     }
