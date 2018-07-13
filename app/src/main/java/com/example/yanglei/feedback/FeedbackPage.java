@@ -114,7 +114,7 @@ public class FeedbackPage extends AppCompatActivity {
 
 
         t1 = (TextView) findViewById(R.id.t1);
-        t1.setText("You have scanned " + SectionName +". Please select the areas you enjoyed the most from this department.");
+        t1.setText("You have scanned " + SectionName +". \nPlease select the areas you enjoyed the most from this department.");
 
 
         features[0] = "Interactive";

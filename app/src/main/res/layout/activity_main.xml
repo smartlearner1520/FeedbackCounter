@@ -22,11 +22,10 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/txt1"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="223dp"
         android:scaleType="center"
-        app:srcCompat="@drawable/p1" />
+        app:srcCompat="@drawable/selling_dreams_logo" />
 
     <TextView
         android:id="@+id/txt1"
@@ -35,19 +34,30 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
+        android:gravity="center"
         android:textStyle="bold"
         android:textColor="#ffffff"
-        android:text="Compare your taste in ads with other visitors!"
-        android:textSize="60dp" />
+        android:text="Compare your taste in ads \nwith other visitors!"
+        android:textSize="45dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView"
+        android:layout_centerHorizontal="true"
+        android:text="Tap anywhere to continue"
+        android:layout_marginTop="20dp"
+        android:textColor="#ffffff"
+        android:textSize="30dp"/>
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/txt1"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="27dp"
-        android:scaleType="center"
-        app:srcCompat="@drawable/sutdlogo" />
+        android:layout_marginBottom="30dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/sutdlogo" />
 
 </RelativeLayout>
