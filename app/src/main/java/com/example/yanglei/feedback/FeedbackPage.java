@@ -230,7 +230,10 @@ public class FeedbackPage extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    Intent intent = new Intent(FeedbackPage.this, ResultPage.class);
+                    //Intent intent = new Intent(FeedbackPage.this, ResultPage.class);
+                    //startActivity(intent);
+
+                    Intent intent = new Intent(FeedbackPage.this,FinalThankYou.class);
                     startActivity(intent);
                 } else{
                     max=0;
