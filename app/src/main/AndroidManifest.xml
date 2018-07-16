@@ -36,10 +36,11 @@
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".SetPassword"
+        <activity
+            android:name=".SetPassword"
             android:configChanges="keyboard|keyboardHidden|orientation"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".FinalThankYou"></activity>
     </application>
 
 </manifest>

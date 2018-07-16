@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_color"
+    android:background="@color/colorSellingDreams"
     android:keepScreenOn="true"
     tools:context="com.example.yanglei.feedback.MainActivity">
 
@@ -37,8 +37,8 @@
         android:gravity="center"
         android:textStyle="bold"
         android:textColor="#ffffff"
-        android:text="Compare your taste in ads \nwith other visitors!"
-        android:textSize="45dp" />
+        android:text="Collected your barcodes? \nTap anywhere to begin!"
+        android:textSize="60dp" />
 
 
     <TextView
@@ -46,7 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/imageView"
         android:layout_centerHorizontal="true"
-        android:text="Tap anywhere to continue"
+        android:gravity="center"
+        android:text="This app will take your feedback about the exhibition.\nYour personal data will not be collected."
         android:layout_marginTop="20dp"
         android:textColor="#ffffff"
         android:textSize="30dp"/>
@@ -58,6 +59,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/sutdlogo" />
+        android:src="@drawable/selling_dreams_sutd_logo" />
 
 </RelativeLayout>
