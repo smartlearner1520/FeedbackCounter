@@ -15,17 +15,46 @@
         android:gravity="center"
         android:textColor="#ffffff"
         android:textSize="75dp"
-        android:text="Thank you for visiting \nthe Selling Dreams exhibition!"/>
+        android:textStyle="bold"
+        android:text="Thank you for visiting"/>
 
-    <Button
-        android:id="@+id/end_button"
-        android:layout_width="170dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
-        android:text="Scan Next Barcode"
-        android:textSize="20dp"
-        android:background="@drawable/buttonstyle" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:src="@drawable/selling_dreams_logo"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/nextscan_button"
+            android:layout_width="170dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
+            android:text="Scan Next Barcode"
+            android:textSize="20dp"
+            android:background="@drawable/buttonstyle" />
+
+        <Button
+            android:id="@+id/end_button"
+            android:layout_width="170dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
+            android:text="No more barcodes"
+            android:textSize="20dp"
+            android:background="@drawable/buttonstyle" />
+
+
+
+
+    </LinearLayout>
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.widget.Toast;
 
 class CountTimer extends CountDownTimer {
     private Context context;
@@ -14,6 +15,7 @@ class CountTimer extends CountDownTimer {
     }
     @Override
     public void onFinish() {
+        Toast.makeText(context,"Inactive Screen",Toast.LENGTH_LONG).show();
         context.startActivity(new Intent(context, MainActivity.class));
 
     }
